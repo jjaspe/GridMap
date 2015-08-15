@@ -1,0 +1,12 @@
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\obj\Debug\GridMaps.csprojResolveAssemblyReference.cache
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\obj\Debug\GridMaps.Properties.Resources.resources
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\obj\Debug\GridMaps.csproj.GenerateResource.Cache
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\bin\Debug\GridMaps.exe
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\bin\Debug\GridMaps.pdb
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\bin\Debug\Canvas Window Template.dll
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\bin\Debug\Tao.OpenGl.dll
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\bin\Debug\Tao.Platform.Windows.dll
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\bin\Debug\ISE.FreeType.dll
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\bin\Debug\Canvas Window Template.pdb
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\obj\Debug\GridMaps.exe
+c:\users\wichito\documents\visual studio 2013\Projects\GridMaps\GridMaps\obj\Debug\GridMaps.pdb
