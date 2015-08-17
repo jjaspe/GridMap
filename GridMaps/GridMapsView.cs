@@ -17,35 +17,30 @@ namespace GridMaps
     public partial class GridMapsView : ReadyOpenGlTemplate
     {
         TileMap Map;
-        int tileSize = 20;
-        List<LowWall> lowWalls = new List<LowWall>();
+        private GridPath Path;
+        public static int tileSize = 20;
+        public IGridPointListProvider GridPointListGenerator=new GridPointListFactory(tileSize,10,10,false); 
+        public IGridPathProvider GridPathProvider=new GridPathFactory(tileSize,1);
 
         public GridMapsView()
         {
             InitializeComponent();           
         }
 
-        public void CreateMap(List<GridPoint> gridPoints,int horizontalSize,int verticalSize)
+        public void CreateMap()
         {
-            Map = new TileMap(gridPoints[0], horizontalSize, verticalSize, Common.planeOrientation.Z, tileSize, Common.colorGreen,
-                Common.colorBlack);
-            foreach(GridPoint point in gridPoints)
-            {
-                if(point.HasHorizontalWall)
-                {
-                    MyWorld.add(new HorizontalWall(point));
-                }
-                if(point.HasVerticalWall)
-                {
-                    MyWorld.add(new VerticalWall(point));
-                }
-            }
+            List<GridPoint> gridPoints = GridPointListGenerator.getGridPoints();
+            Map = new GridPointMap(gridPoints[0], gridPoints,tileSize, Color.Chartreuse);
+        }
+
+        private void CreatePath()
+        {
+            Path = GridPathProvider.getGridPath();
         }
 
         public new void drawingLoop()
         {
-            Common myDrawer = new Common();
-            MyWorld.add(Map);
+            OpenGLDrawer myDrawer = new OpenGLDrawer();
             MyView.setCameraView(simpleOpenGlView.VIEWS.Iso);
 
             while (!MyView.isDisposed() && !this.IsDisposed)
@@ -55,7 +50,7 @@ namespace GridMaps
                 myDrawer.drawWorld(MyWorld);
                 //END DRAW SCENE HERE
                 MyView.flushScene();
-                this.Refresh();
+                ((Control) this).Refresh();
                 Thread.Sleep(100);
                 Application.DoEvents();
             }
@@ -64,81 +59,49 @@ namespace GridMaps
         public void Start()
         {
             this.Show();
-            CreateMap(new List<GridPoint>() { new GridPoint() { X = 0, Y = 0, HasHorizontalWall = true, HasVerticalWall = true } }
-               , 10, 10);
+            CreateMap();
+            CreatePath();
+            Refresh();
             drawingLoop();
         }
-    }
 
-    public class HorizontalWall:Tile
-    {
-        public static int tileSize = 20;
-        public HorizontalWall(GridPoint point)
-            :base(point,new GridPoint(){X=point.X+tileSize,Y=point.Y})
+        public override void Refresh()
         {
-
-        }
-    }
-
-    public class VerticalWall:Tile
-    {
-        public static int tileSize = 20;
-        public VerticalWall(GridPoint point)
-            :base(point,new GridPoint(){X=point.X,Y=point.Y+tileSize})
-        {
-
-        }
-    }
-
-    public class GridPoint:IPoint
-    {
-        public bool HasHorizontalWall { get; set; }
-        public bool HasVerticalWall { get; set; }
-
-        public double X
-        {
-            get;
-            set;
+            MyWorld.RemoveAll();
+            MyWorld.add(Map);
+            MyWorld.add(Path);
         }
 
-        public double Y
+        private void frontButton_Click(object sender, EventArgs e)
         {
-            get;
-            set;
+            MyView.setCameraView(simpleOpenGlView.VIEWS.Front);
         }
 
-        public IPoint copy()
+        private void topButton_Click(object sender, EventArgs e)
         {
-            return new GridPoint() { X = this.X, Y = this.Y,
-                HasHorizontalWall = this.HasHorizontalWall, HasVerticalWall = this.HasVerticalWall };
+            MyView.setCameraView(simpleOpenGlView.VIEWS.Top);
         }
 
-        public bool equals(double[] p)
+        private void btnIsoFront_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            MyView.setCameraView(simpleOpenGlView.VIEWS.FrontUp);
         }
 
-        public bool equals(IPoint p)
+        private void btnIso_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            MyView.setCameraView(simpleOpenGlView.VIEWS.Iso);
         }
 
-        public double[] toArray()
+        private void btnGetNewMap_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            CreateMap();
+            Refresh();
         }
 
-
-        double IPoint.Z
+        private void btnAdvance_Click(object sender, EventArgs e)
         {
-            get
-            {
-                return 0;
-            }
-            set
-            {
-                return;
-            }
+            Path.Advance();
+            Refresh();
         }
     }
 }

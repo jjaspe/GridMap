@@ -32,8 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Canvas Window Template">
-      <HintPath>..\..\..\..\Visual Studio 2010\Projects\Class Libraries\Canvas Window Template\bin\Release\Canvas Window Template.dll</HintPath>
+    <Reference Include="Canvas Window Template, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\GitHub\Libraries\Class Libraries\Canvas Window Template\bin\Debug\Canvas Window Template.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,8 +60,20 @@
     <Compile Include="GridMapsView.Designer.cs">
       <DependentUpon>GridMapsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="GridPathFactory.cs" />
+    <Compile Include="GridPoint.cs" />
+    <Compile Include="GridPointListFactory.cs" />
+    <Compile Include="GridPointMap.cs" />
+    <Compile Include="HorizontalWall.cs" />
+    <Compile Include="IGridPathProvider.cs" />
+    <Compile Include="IGridPointListProvider.cs" />
+    <Compile Include="GridPath.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VerticalWall.cs" />
+    <EmbeddedResource Include="GridMapsView.resx">
+      <DependentUpon>GridMapsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
